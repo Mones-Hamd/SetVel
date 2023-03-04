@@ -11,6 +11,10 @@ import Grid from '@mui/material/Grid';
 import Typography from '@mui/material/Typography';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import images from '../assets/images';
+import { useAuth } from './../hooks/useAuth';
+import { useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
+import {  CircularProgress,} from "@mui/material"
 function Copyright(props) {
   return (
     <Typography variant="body2" color="text.secondary" align="center" {...props}>
@@ -26,14 +30,25 @@ function Copyright(props) {
 
 const theme = createTheme();
 
-const Signin=()=> {
+const SignIn=()=> {
+  const { login } = useAuth();
+  const { isLoading, error, performLogin, cancelFetch, isSuccess } = login;
+  const navigate =useNavigate()
+  useEffect(()=>{
+ 
+    if (isSuccess){
+      navigate('/home')
+    }
+  })
+  
   const handleSubmit = (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
-    console.log({
+   const formData={
       email: data.get('email'),
       password: data.get('password'),
-    });
+    }
+    performLogin(formData)
   };
 
   return (
@@ -68,6 +83,11 @@ const Signin=()=> {
             <Avatar sx={{ m: 1,  }}>
             
             </Avatar>
+            {isLoading&& <CircularProgress />}
+            {error&&  
+           <Typography component="h1" variant="h5" color="error">
+             Invalid Data
+            </Typography>}
             <Typography component="h1" variant="h5">
               Sign in
             </Typography>
@@ -123,4 +143,4 @@ const Signin=()=> {
     </ThemeProvider>
   );
 }
-export default Signin
+export default SignIn
