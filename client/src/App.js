@@ -1,6 +1,6 @@
 
 import './App.css';
-import SignIn from './Pages/SignIn';
+import SignIn from './Pages/Signin';
 import {
   BrowserRouter as Router,
   Routes,
