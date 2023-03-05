@@ -1,0 +1,163 @@
+.container {
+    min-width: 100%;
+  }
+  a {
+    text-decoration: none;
+  }
+  header {
+    min-width: 100%;
+  }
+  .sideBoxNav {
+    top: 14.75%;
+    max-width: 20%;
+    position: absolute;
+    height: 50%;
+    background-color: white;
+    border-bottom-right-radius: 5px;
+    z-index: 9999;
+    border-bottom: 1px solid #32ca6c;
+    border-right: 1px solid rgba(51, 131, 236, 0.752);
+  }
+  .boxHeader {
+    display: flex;
+    justify-content: end;
+    max-width: 90%;
+    height: 10%;
+  }
+  .hamburgerMenu {
+    display: none;
+  }
+  .menu {
+    height: 23vh;
+  }
+  
+  .appBar {
+    display: flex;
+    flex-direction: row !important;
+    justify-content: space-between;
+    align-items: center;
+    min-width: 100%;
+    max-height: 7vh;
+    border-top: 10px #32ca6c solid;
+    border-bottom: 1px rgb(215, 210, 210) solid;
+  }
+  .logo {
+    max-width: 13%;
+    justify-self: start;
+    display: flex;
+  }
+  .icons {
+    margin: 5px;
+  }
+  .image {
+    display: flex;
+    width: 90%;
+    margin: 20px auto;
+  }
+  .toolbar1 {
+    justify-self: end !important;
+    display: flex;
+    align-items: center;
+    width: 40%;
+  }
+  .toolbar {
+    justify-self: end !important;
+    display: flex;
+    align-items: center;
+    width: 40%;
+    justify-content: end;
+  }
+  .profile {
+    display: flex;
+    justify-content: end;
+    width: 100%;
+    align-items: center;
+  }
+  .userName {
+    align-self: center;
+    font-size: 13px;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    margin: 5px;
+  }
+  
+  .purple {
+    margin: 8px;
+    color: blueviolet;
+    max-width: 90%;
+  }
+  .navLink {
+    text-decoration: none;
+    margin: 20px;
+    text-align: center;
+    font-size: 13px;
+    color:#32ca6c;
+    transition: 0.5s;
+  }
+  .navLink:hover {
+    background-color: #32ca6c;
+    padding: 3px;
+    border-radius: 10px;
+    color :black;
+    text-decoration: underline;
+    transform: scale(1.07);
+  }
+  .userInfo {
+    display: flex;
+    width: 50%;
+    justify-content: flex-end;
+    align-items: center;
+  }
+  .signIn {
+    justify-self: end;
+    margin: 20px;
+    text-align: center;
+    font-size: 13px;
+    color: rgb(36, 76, 251);
+    transition: 0.5s;
+  }
+  .signIn:hover {
+    text-decoration: underline;
+    transform: scale(1.07);
+  }
+  @media (max-width: 947px) {
+    .userInfo {
+      width: 100%;
+    }
+  }
+  @media (max-width: 800px) {
+    .toolbar1 {
+      display: none;
+    }
+    .toolbar {
+      width: 70%;
+    }
+    .hamburgerMenu {
+      display: flex;
+      justify-content: space-around;
+    }
+    .userInfo {
+      max-width: 50%;
+    }
+    .appBar {
+      min-height: 13vh;
+    }
+    .logo {
+      min-width: 30%;
+    }
+  }
+  @media (max-width: 550px) {
+    .userName {
+      display: none;
+    }
+    .sideBoxNav {
+      min-width: 50%;
+    }
+    .appBar {
+      min-height: 15vh;
+    }
+    .logo {
+      min-width: 35%;
+    }
+  }
