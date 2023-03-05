@@ -9,31 +9,9 @@ import TablePagination from '@mui/material/TablePagination';
 import TableRow from '@mui/material/TableRow';
 import Checkbox from '@mui/material/Checkbox';
 import classes from './Styles.module.css';
-const columns = [
-  { id: 'name', label: 'Name', minWidth: 170 },
-  { id: 'type', label: 'Type', minWidth: 100 },
-  {
-    id: 'phone',
-    label: 'Phone Number',
-    minWidth: 170,
-    align: 'right',
-    
-  },
-  {
-    id: 'email',
-    label: 'Email',
-    minWidth: 170,
-    align: 'right',
-    format: (value) => value.toLocaleString('en-US'),
-  },
-  {
-    id: 'address',
-    label: 'Address',
-    minWidth: 170,
-    align: 'right',
-    format: (value) => value.toFixed(2),
-  },
-];
+import { TextField } from '@mui/material';
+import EditRow from './EditRow/EditRow';
+import { Link } from 'react-router-dom';
 
 function createData(name, code, population, size) {
   const density = population / size;
@@ -58,42 +36,58 @@ const rows = [
   createData('Brazil', 'BR', 210147125, 8515767),
 ];
 
- const DataTable=() =>{
+const DataTable = () => {
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(10);
+  const [element, setEelement] = React.useState({});
 
   const handleChangePage = (event, newPage) => {
     setPage(newPage);
   };
-
+  const handleDelete = () => {};
   const handleChangeRowsPerPage = (event) => {
     setRowsPerPage(+event.target.value);
     setPage(0);
   };
 
   return (
-    <Paper sx={{ width: '80%', overflow: 'hidden',  }}>
+    <Paper sx={{ width: '80%', overflow: 'hidden' }}>
       <TableContainer sx={{ maxHeight: 440 }}>
-        <Table >
-       
-            <thead>
+        <Table>
+          <thead>
             <th>Name</th>
             <th>Type</th>
             <th>Phone</th>
             <th>Email</th>
             <th>Address</th>
-            </thead>
-          
-     <TableBody sx={{ width: '80%', overflow: 'hidden',alignItems:'center' ,justifyContent:'center' }} >
-            {rows.map((item,index)=>(
-                <tr>
+          </thead>
+
+          <TableBody
+            sx={{
+              width: '80%',
+              overflow: 'hidden',
+              alignItems: 'center',
+              justifyContent: 'center',
+            }}
+          >
+            {rows.map((item, index) => (
+              <tr>
                 <td className={classes.center}>{item.name}</td>
                 <td className={classes.center}>{item.code}</td>
-                <td className={classes.center}><button>edit</button>
+                <td
+                  className={classes.center}
+                  onClick={() => setEelement(item)}
+                >
+                  <Link to={`contact/${item.code}`}>edit</Link>
                 </td>
-                </tr>
+                <td className={classes.center}>
+                  <button onClick={() => handleDelete(item.code)}>
+                    Delete
+                  </button>
+                </td>
+              </tr>
             ))}
-    </TableBody>
+          </TableBody>
         </Table>
       </TableContainer>
       <TablePagination
@@ -107,5 +101,5 @@ const rows = [
       />
     </Paper>
   );
-}
-export default DataTable
+};
+export default DataTable;

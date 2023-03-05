@@ -1,4 +1,3 @@
-
 import './App.css';
 import SignIn from './Pages/Signin';
 import {
@@ -10,22 +9,26 @@ import {
 import SignUp from './Pages/Signup';
 import { AuthContextProvider } from './context/AuthContext';
 import Home from './Pages/Home';
+import AddContact from './Pages/AddContact';
+import { ContactsProvider } from './context/Contactcontext';
 
-const App=()=> {
+const App = () => {
   return (
-   <>
-   <AuthContextProvider >
-   <Router>
-    
-    <Routes>
-    <Route path="/signin" element={<SignIn />} />
-    <Route path="/signup" element={<SignUp />} />
-    <Route path="/home" element={<Home />} />
-   </Routes>
-   </Router>
-   </AuthContextProvider>
-   </>
+    <>
+      <AuthContextProvider>
+        <ContactsProvider>
+          <Router>
+            <Routes>
+              <Route path="/signin" element={<SignIn />} />
+              <Route path="/signup" element={<SignUp />} />
+              <Route path="/home" element={<Home />} />
+              <Route path="/add" element={<AddContact />} />
+            </Routes>
+          </Router>
+        </ContactsProvider>
+      </AuthContextProvider>
+    </>
   );
-}
+};
 
 export default App;
