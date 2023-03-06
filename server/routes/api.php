@@ -24,7 +24,8 @@ Route::post('/login', [AuthController::class, "login"]);
 
 Route::controller(ContactsController::class)->group(function (){
     Route::get('/contacts','index');
-    Route::get('/contacts/{user_id}','show'); 
+    Route::get('/contacts/{user}','show'); 
+    Route::post('/contacts','store');
     Route::patch('/contacts/{contact}','update') ;
     Route::delete('/contacts/{contact}','destroy');
 });

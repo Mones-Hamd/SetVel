@@ -1,7 +1,7 @@
 import { useState } from "react";
 
 
-const useFetch = (route, onReceived, onError) => {
+const useFetch = (route,  onReceived, onError) => {
   
   const controller = new AbortController();
   const signal = controller.signal;
@@ -48,10 +48,11 @@ const useFetch = (route, onReceived, onError) => {
       }
 
       const jsonResult = await res.json();
-
+  
       if (jsonResult.success === true) {
-        setIsSuccess(true);
-        onReceived(jsonResult);
+         setIsSuccess(true);
+        await onReceived(jsonResult);
+
       } else {
         setError(
           jsonResult.msg ||

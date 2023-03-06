@@ -73,6 +73,12 @@ const Navbar = () => {
          Add Contact
           </Link>
         </Typography>
+        <Typography variant="h6">
+          <Link to="/home" className={classes.navLink}>
+            {' '}
+        Home
+          </Link>
+        </Typography>
    
       </div>
 
@@ -89,7 +95,7 @@ const Navbar = () => {
                   {user?.name.charAt(0)}
                 </Avatar>
               </Link>
-              <Link to="/profile">
+              <Link to="/home">
                 <Typography className={classes.userName} color="black">
                   {user?.name}
                 </Typography>
@@ -103,7 +109,7 @@ const Navbar = () => {
             </Link>
           </div>
         ) : (
-          <Link className={classes.signIn} to="/auth">
+          <Link className={classes.signIn} to="/signin">
             <AiOutlineLogin className={classes.icons} color="blue" />
             Sign In
           </Link>
