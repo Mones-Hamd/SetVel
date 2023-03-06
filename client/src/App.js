@@ -19,9 +19,11 @@ const App = () => {
         <ContactsProvider>
           <Router>
             <Routes>
+            <Route path="/" element={<Navigate to="/home" />} />
               <Route path="/signin" element={<SignIn />} />
               <Route path="/signup" element={<SignUp />} />
               <Route path="/home" element={<Home />} />
+              <Route path='/home/contact/:id' element={<AddContact />} />
               <Route path="/add" element={<AddContact />} />
             </Routes>
           </Router>

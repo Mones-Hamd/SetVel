@@ -1,5 +1,5 @@
 import * as React from 'react';
-import Avatar from '@mui/material/Avatar';
+
 import Button from '@mui/material/Button';
 import CssBaseline from '@mui/material/CssBaseline';
 import TextField from '@mui/material/TextField';
@@ -7,15 +7,16 @@ import { useNavigate } from 'react-router-dom';
 import Link from '@mui/material/Link';
 import Grid from '@mui/material/Grid';
 import Box from '@mui/material/Box';
-
+import { useAuth } from './../hooks/useAuth';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
-import { useAuth } from './../hooks/useAuth';
-import { useEffect } from 'react';
+import { useParams } from 'react-router-dom';
+
 import { CircularProgress } from '@mui/material';
 import Navbar from '../Components/Navbar/Navbar';
 
+import { useContact } from './../hooks/useContact';
 function Copyright(props) {
   return (
     <Typography
@@ -37,7 +38,33 @@ function Copyright(props) {
 const theme = createTheme();
 
 const AddContact = () => {
-  const handleSubmit = () => {};
+  const {id}=useParams()
+  const navigate= useNavigate()
+  const {postContact,updateContact}=useContact(id)
+  const {user}=useAuth()
+
+ 
+
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    const data = new FormData(event.currentTarget);
+   const formData={
+      name: `${data.get('firstName')} ${data.get('lastName')}`,
+      type: data.get('type'),
+      phone: data.get('phone'),
+       address: data.get('address'),
+       email:data.get('email'),
+       user_id: user.id,
+    }
+    if(id) {
+      updateContact.perform(formData)
+    }else{
+    postContact.perform(formData)
+    }
+    navigate('/home')
+
+  };
+
   return (
     <>
       <Navbar />
@@ -53,9 +80,13 @@ const AddContact = () => {
             }}
           >
             <Typography component="h1" variant="h5">
-              Add Contact
+             {id? 'Edit Contact':'Add Contact'} 
             </Typography>
-
+            {(postContact.isLoading ||updateContact.isLoading) && <CircularProgress />}
+            {(postContact.error || updateContact.error)  &&  
+           <Typography component="h1" variant="h5" color="error">
+             Invalid Data
+            </Typography>}
             <Box
               component="form"
               noValidate
@@ -72,6 +103,7 @@ const AddContact = () => {
                     id="firstName"
                     label="First Name"
                     autoFocus
+
                   />
                 </Grid>
                 <Grid item xs={12} sm={6}>
@@ -92,6 +124,7 @@ const AddContact = () => {
                     label="Type"
                     name="type"
                     autoComplete="type"
+              
                   />
                 </Grid>
                 <Grid item xs={12}>
@@ -103,6 +136,7 @@ const AddContact = () => {
                     type="number"
                     id="phone"
                     autoComplete="number"
+               
                   />
                 </Grid>
                 <Grid item xs={12}>
@@ -114,6 +148,7 @@ const AddContact = () => {
                     type="email"
                     id="email"
                     autoComplete="email"
+
                   />
                 </Grid>
                 <Grid item xs={12}>
@@ -125,6 +160,7 @@ const AddContact = () => {
                     type="text"
                     id="address"
                     autoComplete="address"
+
                   />
                 </Grid>
               </Grid>
