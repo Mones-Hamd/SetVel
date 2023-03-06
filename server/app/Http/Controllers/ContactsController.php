@@ -31,12 +31,15 @@ class ContactsController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(User $user_id)
-    {
-        $contacts=Contacts::find($user_id)->all();
+    public function show(User $user)
+    {   
+       
+        $user_id=$user->id;
      
-        return response([['success'=> true,
-        'contacts'=>$contacts]]);
+        $contacts= Contacts::all()->where('user_id','=',$user_id);
+     
+        return response(['success'=> true,
+        'contacts'=>[$contacts] ]);
     }
 
     /**
